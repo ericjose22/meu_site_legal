@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ericjs22 Apresenta: Gotham City e o Morcego</title>
+    <style>
+        /* O seletor ':root' permite definir variáveis CSS globais que podem ser usadas em qualquer lugar. */
+        /* Isso facilita a troca de temas (dark/light mode). */
+        :root {
+            /* VARIÁVEIS DO TEMA CLARO (Padrão: Batman Ano Um / Silêncio) */
+            --cor-principal: #2f2c79;
+            /* Azul escuro (o azul do Batman) */
+            --cor-secundaria: #090808;
+            /* Preto quase total */
+            --cor-texto-claro: #ffffff;
+            /* Branco para o texto em fundos escuros */
+            --cor-fundo-claro: #f0f0f0;
+            /* Cinza bem claro (para o corpo da página) */
+            --cor-botao-fundo: var(--cor-principal);
+            /* O botão usa a cor principal como fundo */
+            --cor-botao-texto: var(--cor-texto-claro);
+            /* O texto do botão é branco */
+        }
+
+        /* Esta classe será aplicada ao corpo da página quando o usuário trocar o tema. */
+        /* Ela sobrescreve as variáveis do ':root' para criar o tema escuro. */
+        .tema-dark {
+            /* VARIÁVEIS DO TEMA ESCURO (Requisitado: Preto e Vermelho - Inspirado no Morcego) */
+            --cor-principal: #a00000;
+            /* Vermelho escuro forte (Destaque do "dark mode") */
+            --cor-secundaria: #000000;
+            /* Preto total (fundo do tema dark) */
+            --cor-texto-claro: #ffffff;
+            /* Branco ou tons claros para o texto */
+            --cor-fundo-claro: var(--cor-secundaria);
+            /* O fundo da página fica preto */
+            --cor-botao-fundo: var(--cor-principal);
+            /* O botão usa o vermelho escuro */
+            --cor-botao-texto: var(--cor-texto-claro);
+            /* O texto do botão é branco */
+        }
+
+        body {
+            /* 'body' é o seletor que aplica estilos ao conteúdo visível de toda a página. */
+            font-family: 'Arial', sans-serif;
+            /* 'font-family' define o tipo de fonte para todo o site. Arial é uma fonte padrão e limpa. */
+            background-color: var(--cor-fundo-claro);
+            /* 'background-color' usa a cor de fundo definida na variável do tema. */
+            color: var(--cor-secundaria);
+            /* 'color' define a cor padrão do texto (no tema claro é o preto). */
+            margin: 0;
+            /* 'margin: 0' remove as margens padrão do navegador em volta da página. */
+            padding: 20px;
+            /* 'padding' adiciona um espaçamento interno entre o conteúdo e a borda da página. */
+            transition: background-color 0.5s, color 0.5s;
+            /* 'transition' cria uma animação suave quando o tema muda, tornando a troca mais agradável visualmente. */
+        }
+
+        header {
+            /* 'header' estiliza a seção de cabeçalho (topo) da página. */
+            background-color: var(--cor-principal);
+            /* Fundo com a cor principal (azul escuro ou vermelho). */
+            color: var(--cor-texto-claro);
+            /* Texto na cor branca. */
+            padding: 20px;
+            /* Espaçamento interno. */
+            text-align: center;
+            /* Alinha o texto do cabeçalho no centro. */
+            margin-bottom: 30px;
+            /* Espaço abaixo do cabeçalho. */
+            border-radius: 8px;
+            /* Bordas arredondadas para um visual mais moderno. */
+        }
+
+        h1 {
+            /* Estiliza o título principal <h1>. */
+            margin-top: 0;
+            /* Remove a margem superior padrão para que fique alinhado com o topo do 'header'. */
+            font-size: 2.5em;
+            /* 'em' é uma unidade de tamanho relativa: 2.5 vezes o tamanho da fonte padrão. */
+        }
+
+        p {
+            /* Estiliza parágrafos. */
+            line-height: 1.6;
+            /* 'line-height' define o espaçamento entre as linhas do texto, melhorando a leitura. */
+            max-width: 800px;
+            /* Limita a largura do parágrafo para que o texto não fique muito longo, o que cansa a leitura. */
+            margin: 15px auto;
+            /* 'auto' centraliza o parágrafo na página. */
+            text-align: justify;
+            /* 'text-align: justify' alinha o texto tanto na margem esquerda quanto na direita. */
+        }
+
+        .container {
+            /* Estiliza o contêiner principal do conteúdo. */
+            max-width: 1000px;
+            /* Largura máxima do conteúdo. */
+            margin: 0 auto;
+            /* Centraliza o contêiner na tela. */
+        }
+
+        .botao-acao {
+            /* Estiliza a classe que usamos para todos os nossos botões interativos. */
+            background-color: var(--cor-botao-fundo);
+            /* Cor de fundo do botão (do tema). */
+            color: var(--cor-botao-texto);
+            /* Cor do texto do botão. */
+            border: none;
+            /* Remove a borda padrão do botão. */
+            padding: 10px 20px;
+            /* Espaçamento interno (cima/baixo e esquerda/direita). */
+            margin: 10px;
+            /* Margem externa. */
+            border-radius: 5px;
+            /* Bordas arredondadas. */
+            cursor: pointer;
+            /* 'cursor: pointer' faz o cursor mudar para uma mãozinha quando passa por cima, indicando que é clicável. */
+            transition: background-color 0.3s, transform 0.1s;
+            /* Animações suaves para o hover e clique. */
+            font-weight: bold;
+            /* Deixa o texto do botão em negrito. */
+        }
+
+        .botao-acao:hover {
+            /* Este seletor ':hover' aplica estilos APENAS quando o mouse está sobre o elemento. */
+            background-color: #3d3b9e;
+            /* Uma cor um pouco mais escura quando o mouse passa (efeito visual de "passar"). */
+            opacity: 0.9;
+            /* Torna o botão ligeiramente transparente para um efeito sutil. */
+        }
+
+        .tema-dark .botao-acao:hover {
+            /* Sobrescreve o hover para o tema escuro. */
+            background-color: #ff0000;
+            /* Um vermelho mais vivo no tema escuro. */
+        }
+
+        .botao-acao:active {
+            /* Este seletor ':active' aplica estilos APENAS no momento em que o botão é clicado (pressionado). */
+            transform: scale(0.98);
+            /* 'transform: scale()' encolhe ligeiramente o botão, dando um efeito de "clique". */
+        }
+
+        #imagem-batman {
+            /* Estiliza a imagem que aparecerá após o clique. O '#' indica que estamos estilizando um ID específico. */
+            max-width: 100%;
+            /* Garante que a imagem nunca seja maior que a largura do seu contêiner. Essencial para celular! */
+            height: auto;
+            /* Mantém a proporção da imagem ao redimensionar. */
+            display: block;
+            /* Faz com que a imagem se comporte como um bloco (ocupa a largura total do contêiner). */
+            margin: 20px auto;
+            /* Centraliza a imagem. */
+            border: 4px solid var(--cor-principal);
+            /* Uma borda com a cor do tema para destacar a imagem. */
+            border-radius: 10px;
+            /* Bordas arredondadas. */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🦇 O Bat-Sinal do Código - Ericjs22</h1>
+        <p>Olá, Professor! Este é o meu primeiro site focado nos quadrinhos de **Batman: Ano Um** e **Silêncio**.</p>
+    </header>
+
+    <div class="container">
+        <h2>Bem-vindo a Gotham City!</h2>
+        <p>O Batman, também conhecido como Cavaleiro das Trevas, é um dos heróis mais icônicos do universo DC. Diferente de outros, ele não tem superpoderes, contando apenas com sua inteligência, treinamento físico e equipamentos de alta tecnologia. Histórias como *Ano Um* (que foca em seu início) e *Silêncio* (um mistério complexo) são leituras obrigatórias para entender a profundidade do personagem.</p>
+
+        <h3>Interação: Onde Está a Bat-Caverna?</h3>
+        <p>Clique no botão abaixo para revelar uma imagem incrível do Morcego (a imagem que você pediu)!</p>
+        <button id="botaoRevelar" class="botao-acao">Mostrar Imagem Secreta</button>
+        <img id="imagem-batman" src="https://images5.alphacoders.com/136/thumb-1920-1360264.jpg" alt="Ilustração do Batman em um beco escuro de Gotham." style="display: none;">
+        <hr>
+        <h3>Interação Bônus: O Bat-Sinal de Emergência (Dark Mode)</h3>
+        <p>Alterne entre o tema clássico (azul e preto) e o tema de emergência (vermelho e preto) com este botão.</p>
+        <button id="botaoTema" class="botao-acao">Ativar Bat-Sinal (Mudar Tema)</button>
+
+    </div>
+
+    <script>
+        // --- JAVASCRIPT: Interação 1 (Mostrar Imagem) ---
+
+        // 1. Encontrar os elementos HTML.
+        const botaoRevelar = document.getElementById('botaoRevelar');
+        // 'const' cria uma variável. 'document.getElementById()' encontra o elemento (o botão) na página usando seu ID único.
+
+        const imagemBatman = document.getElementById('imagem-batman');
+        // Encontra o elemento da imagem.
+
+        // 2. Definir o que acontece no clique.
+        botaoRevelar.addEventListener('click', () => {
+            // 'addEventListener' diz ao 'botaoRevelar' para "ouvir" um evento, neste caso, o 'click'.
+            // A parte '() => { ... }' é uma função que será executada quando o clique acontecer.
+
+            if (imagemBatman.style.display === 'none') {
+                // Se a propriedade 'display' da imagem for 'none' (ou seja, ela está escondida)...
+                imagemBatman.style.display = 'block';
+                // ...então mude para 'block' (mostrando a imagem).
+                botaoRevelar.textContent = 'Esconder Imagem Secreta';
+                // E mude o texto do botão para indicar a nova ação.
+            } else {
+                // Senão (se a imagem JÁ estiver visível)...
+                imagemBatman.style.display = 'none';
+                // ...esconda a imagem novamente.
+                botaoRevelar.textContent = 'Mostrar Imagem Secreta';
+                // E restaure o texto do botão.
+            }
+        });
+
+
+        // --- JAVASCRIPT: Interação 2 (Trocar Tema - Dark Mode) ---
+
+        // 1. Encontrar os elementos HTML necessários.
+        const botaoTema = document.getElementById('botaoTema');
+        // Encontra o botão de tema.
+
+        const corpoPagina = document.body;
+        // 'document.body' é uma forma mais fácil de acessar a tag <body> (o corpo da página).
+
+        // 2. Definir o que acontece no clique.
+        botaoTema.addEventListener('click', () => {
+            // Adiciona o "ouvinte" de clique ao botão de tema.
+
+            // 'toggle' (alternar) é uma função mágica. Ele verifica se a classe 'tema-dark' existe:
+            // - Se existir, ele REMOVE a classe.
+            // - Se não existir, ele ADICIONA a classe.
+            // Isso troca o tema com apenas uma linha de código, graças ao nosso CSS que usa ':root' e variáveis!
+            corpoPagina.classList.toggle('tema-dark');
+
+            // 3. Atualizar o texto do botão com base no tema atual.
+            if (corpoPagina.classList.contains('tema-dark')) {
+                // 'classList.contains' verifica se a classe 'tema-dark' está presente no <body>.
+                botaoTema.textContent = 'Desativar Bat-Sinal (Tema Clássico)';
+                // Se for dark, o texto sugere voltar.
+            } else {
+                botaoTema.textContent = 'Ativar Bat-Sinal (Mudar Tema)';
+                // Se não for dark (ou seja, é o tema claro), o texto sugere mudar.
+            }
+        });
+
+    </script>
+</body>
+
+</html>
