@@ -1,149 +1,343 @@
+<!-- O doctype HTML5 informa ao navegador qual tipo de documento está sendo carregado. É o primeiro comando! -->
 <!DOCTYPE html>
+<!-- A tag <html> é o elemento raiz de toda a página HTML. O 'lang="pt-BR"' define o idioma principal. -->
 <html lang="pt-BR">
 <head>
+    <!-- A tag <head> contém metadados sobre o documento. O que o usuário não vê diretamente, mas o navegador usa. -->
+
+    <!-- Define o conjunto de caracteres para UTF-8, o que garante que acentos e caracteres especiais (como "ç" ou "é") funcionem corretamente. -->
     <meta charset="UTF-8">
+
+    <!-- Esta meta tag é CRUCIAL para que o site funcione bem em celulares e tablets (responsividade). Ela garante que a largura do site se adapte ao dispositivo. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ericjs22: Arquivos de Gotham City (Batman)</title>
+
+    <!-- O título que aparece na aba do navegador. -->
+    <title>Peacemaker S2 - Ericjs22</title>
+
+    <!-- Aqui começam os estilos (CSS) do nosso site. Eles definem a APARÊNCIA, usando as cores cinza e vermelho que você escolheu. -->
     <style>
-        /* O seletor ':root' permite definir variáveis CSS globais (para o tema). */
-        :root {
-            /* VARIÁVEIS DO TEMA CLÁSSICO (Azul Escuro e Preto) - SUAS PREFERÊNCIAS! */
-            --cor-principal: #2f2c79; /* Azul Escuro do Batman */
-            --cor-secundaria: #090808; /* Preto Quase Total (para alguns detalhes e texto no tema claro) */
-            --cor-texto-principal: #ffffff; /* Branco, para o texto se destacar no fundo escuro */
-            --cor-fundo-claro: var(--cor-principal); /* Fundo da página com o seu azul escuro */
-            --cor-fundo-detalhe: #1a1854; /* Um azul um pouco mais claro para as caixas de conteúdo */
-            --cor-destaque: #ff0000; /* Vermelho para o Dark Mode (troca de tema) */
-        }
-
-        /* Esta classe será aplicada ao corpo da página para o tema DARK MODE (Vermelho e Preto). */
-        .tema-dark {
-            /* VARIÁVEIS DO TEMA ESCURO (Vermelho e Preto - Bat-Sinal de Emergência) */
-            --cor-principal: var(--cor-destaque); /* Vermelho como cor principal */
-            --cor-secundaria: #000000; /* Preto Total */
-            --cor-texto-principal: #ffffff; /* Texto continua branco */
-            --cor-fundo-claro: var(--cor-secundaria); /* Fundo da página fica preto */
-            --cor-fundo-detalhe: #1a0000; /* Um vermelho/preto muito escuro para as caixas */
-        }
-
+        /* O seletor 'body' aplica estilos a todo o conteúdo visível do site. */
         body {
-            /* 'body' aplica estilos ao conteúdo visível de toda a página. */
-            font-family: 'Arial', sans-serif; /* Define a fonte (limpa e fácil de ler). */
-            background-color: var(--cor-fundo-claro); /* Usa o azul escuro para o fundo. */
-            color: var(--cor-texto-principal); /* O texto em todo o corpo da página é branco. */
-            margin: 0; /* Remove margens padrão do navegador. */
-            padding: 20px; /* Espaçamento interno. */
-            transition: background-color 0.5s, color 0.5s; /* Animação suave para a troca de tema. */
-        }
-
-        header {
-            /* Estiliza o topo da página. */
-            background-color: var(--cor-secundaria); /* Fundo preto (sua preferência). */
-            color: var(--cor-texto-principal); /* Texto branco. */
-            padding: 25px; /* Espaçamento interno. */
-            text-align: center; /* Centraliza o texto. */
-            margin-bottom: 30px; /* Espaço abaixo do cabeçalho. */
-            border-radius: 8px; /* Bordas arredondadas. */
-            border-bottom: 4px solid var(--cor-principal); /* Uma linha com a cor principal (azul/vermelho). */
-        }
-
-        .container {
-            /* Contêiner principal para centralizar o conteúdo. */
-            max-width: 1100px; /* Largura máxima. */
-            margin: 0 auto; /* Centraliza o contêiner. */
-            padding-bottom: 50px; /* Espaço no final da página. */
-        }
-
-        .content-box {
-            /* Estilo para as caixas que contêm o conteúdo principal e as biografias. */
-            background-color: var(--cor-fundo-detalhe); /* Fundo azul/preto mais claro que o body. */
+            /* 'background-color' define a cor de fundo de todo o site como um cinza bem escuro (#1a202c). */
+            background-color: #1a202c;
+            /* 'color' define a cor padrão do texto para um cinza claro/quase branco (#edf2f7). */
+            color: #edf2f7;
+            /* 'font-family' define o tipo de letra. 'sans-serif' é uma fonte de fácil leitura. */
+            font-family: 'Inter', sans-serif;
+            /* Adiciona um pequeno espaçamento nas laterais da página, para que o conteúdo não toque as bordas. */
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade (efeito "3D"). */
+            /* Garante que a página não tenha rolagem lateral (horizontal) indesejada. */
+            overflow-x: hidden;
         }
 
-        .botao-acao {
-            /* Estilo para todos os botões interativos. */
-            background-color: var(--cor-principal); /* Cor principal (azul/vermelho). */
-            color: var(--cor-texto-principal);
-            border: none;
-            padding: 12px 25px;
-            margin: 10px 10px 10px 0;
-            border-radius: 5px;
-            cursor: pointer; /* Muda o cursor para uma mãozinha. */
-            transition: background-color 0.3s, transform 0.1s;
-            font-weight: bold;
-        }
-
-        .botao-acao:hover {
-            /* Efeito ao passar o mouse. */
-            background-color: var(--cor-destaque); /* Usa o vermelho (destaque) no hover. */
-        }
-
-        .botao-acao:active {
-            /* Efeito ao clicar. */
-            transform: scale(0.98); /* Encolhe ligeiramente o botão. */
-        }
-
-        .galeria-imagens {
-            /* Estilo para a seção que agrupa as imagens e suas legendas. */
-            display: flex; /* Usa Flexbox para colocar itens lado a lado. */
-            flex-wrap: wrap; /* Permite que as imagens quebrem para a linha de baixo em telas pequenas. */
-            gap: 20px; /* Espaço entre as colunas. */
-            justify-content: space-around; /* Distribui o espaço entre as imagens. */
-            text-align: center;
-        }
-
-        .galeria-item {
-            /* Estilo para cada item na galeria (imagem + texto). */
-            max-width: 45%; /* Cada item ocupa no máximo 45% da largura (caberão 2 por linha). */
-            min-width: 300px; /* Garante que em telas pequenas, cada um use uma linha (para não esmagar). */
-        }
-
-        .galeria-item img {
-            /* Estilo para as imagens dentro da galeria. */
-            width: 100%; /* Imagem preenche a largura do seu contêiner. */
-            height: auto; /* Mantém a proporção da imagem. */
-            border: 3px solid var(--cor-principal); /* Borda destacada. */
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        #imagem-batman {
-            /* Estiliza a imagem que o JS vai mostrar/esconder (a imagem de URL que você pediu). */
-            max-width: 80%;
-            display: block;
-            margin: 20px auto;
-            border: 5px solid var(--cor-destaque); /* Borda vermelha para a imagem de ação! */
+        /* O seletor '.container' é uma classe que centraliza e limita a largura do conteúdo principal. */
+        .container {
+            /* Define a largura máxima que o conteúdo pode ter (por exemplo, 800 pixels) para não ficar muito largo em monitores grandes. */
+            max-width: 800px;
+            /* 'margin: 0 auto;' é a técnica MÁGICA para centralizar o bloco horizontalmente na tela. */
+            margin: 0 auto;
+            /* Adiciona bordas arredondadas ao container (12 pixels). */
             border-radius: 12px;
+            /* Adiciona preenchimento interno para o conteúdo não ficar colado nas bordas. */
+            padding: 20px;
+            /* Adiciona uma sombra suave para dar profundidade, simulando que o container está levemente levantado. */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            /* Define o fundo do container como um cinza um pouco mais claro que o body. */
+            background-color: #2d3748;
+        }
+
+        /* Estilo para todos os cabeçalhos principais (h1, h2). */
+        h1, h2 {
+            /* Define a cor dos títulos para o nosso vermelho de destaque (#e53e3e). */
+            color: #e53e3e;
+            /* Centraliza o texto dos títulos. */
+            text-align: center;
+            /* Adiciona um espaçamento abaixo dos títulos. */
+            margin-bottom: 15px;
+        }
+
+        /* Estilo específico para o título principal. */
+        h1 {
+            /* Aumenta o tamanho da fonte para o título principal (2.5 vezes o tamanho padrão). */
+            font-size: 2.5em;
+            /* Deixa o texto em caixa alta. */
+            text-transform: uppercase;
+        }
+
+        /* Estilo para a tag de parágrafo. */
+        p {
+            /* Adiciona um espaçamento abaixo para separar os parágrafos. */
+            margin-bottom: 15px;
+            /* 'line-height' define a altura da linha para melhorar a leitura. */
+            line-height: 1.6;
+        }
+
+        /* Estilo para o nosso botão de interação. */
+        .btn-red {
+            /* Define a cor de fundo do botão para vermelho (#e53e3e). */
+            background-color: #e53e3e;
+            /* Define a cor do texto do botão para branco. */
+            color: white;
+            /* Remove a borda padrão que os navegadores costumam adicionar. */
+            border: none;
+            /* Adiciona preenchimento interno para o botão ser maior e mais fácil de clicar. */
+            padding: 12px 20px;
+            /* Adiciona bordas arredondadas (8 pixels). */
+            border-radius: 8px;
+            /* Muda o cursor para uma 'mãozinha' para indicar que é clicável. */
+            cursor: pointer;
+            /* Adiciona uma transição suave para as mudanças de estilo (ex: no hover). */
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            /* Faz o botão ocupar 100% da largura do seu container. */
+            width: 100%;
+            /* Deixa o texto em negrito. */
+            font-weight: bold;
+            /* Adiciona um espaçamento acima do botão. */
+            margin-top: 20px;
+        }
+
+        /* Estilo para quando o mouse passa por cima do botão (efeito 'hover'). */
+        .btn-red:hover {
+            /* Escurece um pouco a cor de fundo do botão para dar feedback visual. */
+            background-color: #c53030;
+        }
+
+        /* Estilo para o momento em que o botão é clicado (efeito 'active'). */
+        .btn-red:active {
+            /* Move o botão 1 pixel para baixo para simular um clique. */
+            transform: translateY(1px);
+        }
+
+        /* Estilo para a lista de acontecimentos (<ul>). */
+        .events-list {
+            /* Remove os marcadores de lista padrão (os pontinhos). */
+            list-style: none;
+            /* Remove o preenchimento interno padrão da lista. */
+            padding: 0;
+            /* Adiciona um espaçamento acima. */
+            margin-top: 15px;
+            /* Adiciona uma borda na parte superior para separação visual. */
+            border-top: 1px solid #4a5568;
+        }
+
+        /* Estilo para cada item da lista (<li>). */
+        .events-list li {
+            /* Adiciona preenchimento para que o texto não fique colado. */
+            padding: 12px 0;
+            /* Adiciona uma borda na parte inferior para separar os itens. */
+            border-bottom: 1px solid #4a5568;
+            /* Posiciona o marcador de forma relativa. */
+            position: relative;
+            /* Cria espaço à esquerda para nosso ícone personalizado. */
+            padding-left: 30px; 
+        }
+
+        /* Pseudo-elemento que cria o ícone de marcador personalizado (o símbolo de estrela vermelha). */
+        .events-list li::before {
+            /* Conteúdo do marcador (um caractere Unicode que se parece com uma estrela, &#9733;). */
+            content: "\2605";
+            /* Define a cor do marcador para o nosso vermelho de destaque. */
+            color: #e53e3e;
+            /* Posiciona o marcador de forma absoluta (fixa em relação ao <li>). */
+            position: absolute;
+            /* Distância da esquerda. */
+            left: 0;
+            /* Alinhamento vertical. */
+            top: 12px;
+            /* Define o tamanho da fonte do ícone. */
+            font-size: 1.1em;
+        }
+
+        /* Estilo para o local onde a imagem será exibida. */
+        #image-display {
+            /* Define a largura total. */
+            width: 100%;
+            /* Define a altura máxima. */
+            max-height: 450px;
+            /* Faz com que o conteúdo que extrapole o tamanho seja cortado. */
+            overflow: hidden;
+            /* Adiciona espaçamento acima. */
+            margin-top: 25px;
+            /* Define o fundo para destacar a área. */
+            background-color: #4a5568;
+            /* Borda arredondada. */
+            border-radius: 8px;
+            /* Centraliza a imagem. */
+            text-align: center;
+            /* Inicialmente, a imagem não é visível. O JS vai mudar isso. */
+            display: none;
+            /* Adiciona um padding interno. */
+            padding: 15px;
+        }
+
+        /* Estilo para a imagem (<img>) dentro da div #image-display. */
+        #image-display img {
+            /* Garante que a imagem nunca ultrapasse a largura do seu container. */
+            max-width: 100%;
+            /* Garante que a imagem nunca ultrapasse a altura do seu container. */
+            max-height: 100%;
+            /* 'object-fit: contain' faz a imagem se ajustar ao espaço sem ser cortada, mantendo o aspecto. */
+            object-fit: contain;
+            /* Borda arredondada na imagem. */
+            border-radius: 6px;
+        }
+
+        /* Estilo para o rodapé do site. */
+        footer {
+            /* Centraliza o texto. */
+            text-align: center;
+            /* Adiciona um espaçamento superior grande. */
+            margin-top: 50px;
+            /* Diminui o tamanho da fonte. */
+            font-size: 0.8em;
+            /* Define a cor do texto do rodapé. */
+            color: #a0aec0;
+            /* Adiciona uma borda separadora. */
+            border-top: 1px solid #4a5568;
+            /* Adiciona um espaçamento interno. */
+            padding-top: 15px;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>🦇 Arquivos de Gotham City - Ericjs22</h1>
-        <p>Análise de **Batman: Ano Um** e **Silêncio** no seu primeiro código HTML/CSS/JS!</p>
-    </header>
+    <!-- A tag <body> contém todo o conteúdo visível do site. -->
 
+    <!-- <div> é uma tag de divisão, usada para agrupar e aplicar estilos. A classe 'container' centraliza tudo. -->
     <div class="container">
-        <div class="content-box">
-            <h2>💡 Sobre os Clássicos do Batman</h2>
-            <p><strong>Batman: Ano Um (1987)</strong> é a história definitiva sobre as origens de Bruce Wayne como o Cavaleiro das Trevas e a ascensão de Jim Gordon em Gotham. Já <strong>Batman: Silêncio (2002-2003)</strong> é um arco moderno que explora os relacionamentos de Bruce, apresentando um novo e misterioso vilão que orquestra os encontros de Batman com sua galeria de inimigos.</p>
-        </div>
 
-        <hr>
-        <div class="content-box">
-            <h3>🖼️ Galeria de Personagens e Biografias</h3>
-            <p>Conheça um pouco mais sobre os personagens cruciais nessas duas sagas:</p>
+        <!-- <header> define a parte introdutória ou de cabeçalho do site. -->
+        <header>
+            <!-- <h1> é o cabeçalho principal, o título mais importante da página. -->
+            <h1>Projeto Peacemaker S2</h1>
+            <!-- <p> é a tag de parágrafo. -->
+            <p style="text-align: center; color: #a0aec0;">
+                Construído por Ericjs22. A paz a qualquer custo!
+            </p>
+        </header>
 
-            <div class="galeria-imagens">
-                <div class="galeria-item">
-                    <img src="data:image/jpeg;base64,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" alt="Imagem do Batman de Frank Miller">
-                    <h4>Batman (Ano Um)</h4>
-                    <p><strong>Quem é:</strong> Bruce Wayne em seus estágios iniciais, mais cru, impulsivo e com menos recursos. O foco é na construção do mito e de sua identidade. Seus métodos são mais brutais, mas ele está aprendendo os limites.</p>
-                </div>
+        <!-- <main> contém o conteúdo principal e único do documento. -->
+        <main>
+            <!-- <h2> é um cabeçalho de segundo nível, usado para subtítulos. -->
+            <h2>A Missão Continua...</h2>
+            <p>
+                Christopher Smith está de volta em uma nova temporada. Ele terá que equilibrar suas ideias extremas de "paz" com a realidade de ser um herói solo, enquanto lida com novos e bizarros vilões. A segunda temporada promete ainda mais ação, música pesada e, claro, o fiel Eagly!
+            </p>
 
-                <div class="galeria-item">
-                    <img src="data:image/jpeg;base64,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
+            <!-- Seção da Lista de Acontecimentos -->
+            <h2>Momentos Chave da 1ª Temporada</h2>
+            <!-- <ul> (Unordered List) cria uma lista não ordenada. Usamos a classe 'events-list' para estilizar. -->
+            <ul class="events-list">
+                <!-- <li> (List Item) é cada item da lista. -->
+                <li>Peacemaker mata Rick Flag.</li>
+                <li>Harcourt e Economos se tornam aliados cruciais.</li>
+                <li>Peacemaker e Economos fazem as pazes após a dança no escritório.</li>
+                <li>A Borboleta Rainha (Goff) é capturada.</li>
+                <li>Peacemaker descobre que seu pai é o Dragão Branco.</li>
+                <li>A grande batalha no celeiro e o confronto final com o Dragão Branco.</li>
+                <li>O momento em que ele recusa-se a matar a Borboleta Rainha.</li>
+                <li>A aparição da Liga da Justiça no final.</li>
+            </ul>
+
+            <!-- Seção da Interação Simples: Botão e Imagem -->
+            <h2>Interação Simples: Visualizando a Continuação</h2>
+            <p>
+                Clique no botão de destaque (vermelho!) para alternar a visibilidade da imagem da nova temporada. Esta é a parte que vamos controlar com JavaScript!
+            </p>
+
+            <!-- <button> cria um botão clicável. Adicionamos um ID ('show-image-btn') para que o JavaScript possa encontrá-lo (esta é a "ponte" entre o HTML e o JS). -->
+            <button id="show-image-btn" class="btn-red">
+                Mostrar Imagem da Segunda Temporada
+            </button>
+
+            <!-- Esta <div> com o ID 'image-display' será onde a imagem (<img>) será colocada. O JS vai controlá-la. -->
+            <div id="image-display">
+                <!-- A tag <img> será criada e inserida aqui pelo JavaScript. -->
+            </div>
+        </main>
+
+        <!-- <footer> define o rodapé do site. -->
+        <footer>
+            <p>
+                &copy; 2025 Projeto Peacemaker | Desenvolvido por <span style="color: #e53e3e;">Ericjs22</span> para aprender HTML, CSS e JavaScript.
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- A tag <script> contém o código JavaScript, que adiciona COMPORTAMENTO e interatividade. -->
+    <!-- Colocamos o <script> no final do <body> para garantir que o navegador já tenha lido e criado todos os elementos HTML antes de o código tentar usá-los. -->
+    <script>
+        // === VARIÁVEIS E CONSTANTES (PREPARAÇÃO) ===
+        
+        // 'const' declara uma constante, um valor que não muda.
+        // document.getElementById('...') é um comando que BUSCA um elemento HTML usando seu ID.
+        // showImageButton agora "guarda" o elemento botão.
+        const showImageButton = document.getElementById('show-image-btn');
+        
+        // imageDisplayArea agora "guarda" o elemento <div> onde a imagem aparecerá.
+        const imageDisplayArea = document.getElementById('image-display');
+
+        // A URL da imagem que você forneceu. Salvamos o endereço (a string) em uma constante.
+        const imageUrl = 'https://rollingstone.com.br/wp-content/uploads/2025/08/que-horas-estreia-a-2a-temporada-de-pacificador-sequencia-de-superman.jpg';
+
+        // 'let' declara uma variável que PODE mudar.
+        // isImageVisible é uma "chave" (booleana: true ou false) que rastreia o estado atual do elemento.
+        // Começa como 'false', pois a imagem não está visível.
+        let isImageVisible = false;
+
+        // === FUNÇÃO DE INTERAÇÃO (LÓGICA) ===
+
+        // 'function' cria um bloco de código reutilizável que será executado quando chamado.
+        function toggleImage() {
+            // Verifica (usando 'if') se a imagem JÁ ESTÁ visível ('isImageVisible === true').
+            if (isImageVisible) {
+                // SE ESTIVER VISÍVEL, vamos escondê-la:
+                
+                // 1. Acessamos o estilo do elemento e mudamos o 'display' para 'none', escondendo-o.
+                imageDisplayArea.style.display = 'none';
+                
+                // 2. Mudamos o texto do botão de volta para "Mostrar Imagem...".
+                showImageButton.textContent = 'Mostrar Imagem da Segunda Temporada';
+                
+                // 3. Atualizamos a chave de estado para 'false'.
+                isImageVisible = false;
+
+            } else {
+                // SE NÃO ESTIVER VISÍVEL ('else' é executado quando o 'if' é falso):
+                
+                // 1. document.createElement('img') cria uma nova tag <img> na memória.
+                const newImage = document.createElement('img');
+                
+                // 2. Definimos o atributo 'src' (origem) da nova imagem com o endereço (URL).
+                newImage.src = imageUrl;
+                
+                // 3. Definimos o atributo 'alt' (texto alternativo) para acessibilidade.
+                newImage.alt = 'Imagem de divulgação da segunda temporada de Peacemaker';
+
+                // 4. Limpamos o conteúdo da área de exibição para evitar imagens duplicadas.
+                imageDisplayArea.innerHTML = '';
+                
+                // 5. imageDisplayArea.appendChild(newImage) ANEXA (coloca) a nova <img> dentro da <div>.
+                imageDisplayArea.appendChild(newImage);
+
+                // 6. Acessamos o estilo do elemento e mudamos o 'display' para 'block', tornando-o visível.
+                imageDisplayArea.style.display = 'block';
+
+                // 7. Mudamos o texto do botão para 'Esconder Imagem'.
+                showImageButton.textContent = 'Esconder Imagem';
+
+                // 8. Atualizamos a chave de estado para 'true'.
+                isImageVisible = true;
+            }
+        }
+
+        // === ESCUTA DE EVENTOS (CONEXÃO) ===
+
+        // addEventListener('click', ...) diz ao botão para "ouvir" o evento de clique.
+        // Quando o clique acontece, ele executa a função 'toggleImage' que acabamos de definir.
+        showImageButton.addEventListener('click', toggleImage);
+
+    </script>
+</body>
+</html>
